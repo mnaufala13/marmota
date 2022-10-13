@@ -9,6 +9,7 @@ package kafka
 
 import (
 	"context"
+	"fmt"
 	"github.com/zeromicro/go-zero/core/rescue"
 
 	"github.com/Shopify/sarama"
@@ -28,7 +29,7 @@ type ConsumerGroup struct {
 
 func MustKafkaConsumer(c *KafkaConsumerConf) *ConsumerGroup {
 	config := sarama.NewConfig()
-	config.Version = sarama.V0_10_2_0
+	config.Version = sarama.MaxVersion
 	config.Consumer.Offsets.Initial = sarama.OffsetNewest
 	config.Consumer.Return.Errors = false
 
@@ -107,6 +108,7 @@ func (c *ConsumerGroup) Start() {
 			logx.Error(err)
 			return
 		}
+		fmt.Println("xxxx")
 	}
 }
 
